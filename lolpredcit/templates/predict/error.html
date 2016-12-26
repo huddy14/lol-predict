@@ -1,0 +1,22 @@
+<style>
+
+    .jumbotron {
+        padding: 5% 5% 5% 5%;
+        margin: 10% auto;
+        background: rgb(200, 54, 54);
+        background: rgba(0, 0, 0, 0.5) !important;
+    }
+
+</style>
+
+
+{% extends 'base.html'%}
+{% block error %}
+<div class="jumbotron">
+    <div class="alert alert-warning fade in" role="alert">
+        <h3><strong>Error!</strong> {{ message }}</h3>
+        <br>
+        Make sure you entered a valid username that is currently in a game
+    </div>
+</div>
+{% endblock %}

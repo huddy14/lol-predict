@@ -1,0 +1,175 @@
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Kumar+One|Molle:400i');
+
+    .headers th {
+        text-align:center;
+        font-family: 'Kumar One', cursive;
+        font-size: 40px;
+
+    }
+
+    .headers th:first-child {
+        color:red;
+    }
+
+    .headers th:last-child {
+        color:blue;
+
+    }
+
+    .table {
+        font-size: 14px;
+
+    }
+
+    .table td {
+        text-align: center;
+
+    }
+
+    .table th {
+        text-align: center;
+    }
+
+    .img-responsive {
+        margin: 0 auto;
+        width: 50%;
+        height: 50%;
+
+    }
+
+    .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+        background-color: #BFBEBB;
+    }
+
+
+    .jumbotron {
+        padding: 5% 5% 5% 5%;
+        margin: 10% auto;
+        background: rgb(200, 54, 54);
+        background: rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .borderless td, .borderless th {
+        border: none !important;
+    }
+
+
+    .progress {
+        height:50px !important;
+        text-align: center;
+    }
+
+    .massive-font{
+        font-size: 20px !important;
+        font-family: 'Molle', italic;
+        text-align: center;
+    }
+
+    .progress {
+        padding: 15px;
+        background: rgba(0,0,0,0.8) !important;
+    }
+
+
+
+
+</style>
+{% extends 'base.html'%}
+
+{% block results %}
+<div class="span12">
+    <div class="jumbotron jumbotron-background">
+        <div class="table-responsive">
+            <table class="table borderless">
+                <thead class="headers ">
+                <tr>
+
+                    <th>RED TEAM</th>
+                    <th>BLUE TEAM</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="col-md-6">
+                        <table class="table table-striped">
+
+                            <thead>
+                            <tr>
+                                <th>Champion</th>
+                                <th>Summoner</th>
+                                <th>Win rate</th>
+                                <th>Total games</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for p in red %}
+                            <tr>
+                                <td class="col-md-2">
+                                    <img src="{{ p.avatar_url }}" class="img-responsive">
+
+                                </td>
+                                <td class="col-md-5">{{ p.summoner_name }}</td>
+                                <td class="col-md-2">{{ p.winrate|stringformat:".2f" }}</td>
+                                <td class="col-md-3">{{ p.total_games }}</td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </td>
+
+                    <td class="col-md-6">
+                        <table class="table table-striped">
+
+                            <thead>
+                            <tr>
+                                <th>Champion</th>
+                                <th>Summoner</th>
+                                <th>Win rate</th>
+                                <th>Total games</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for p in blue %}
+                            <tr>
+                                <td class="col-md-2">
+                                    <img src="{{ p.avatar_url }}" class="img-responsive">
+
+                                </td>
+                                <td class="col-md-5">{{ p.summoner_name }}</td>
+                                <td class="col-md-2">{{ p.winrate|stringformat:".2f" }}</td>
+                                <td class="col-md-3">{{ p.total_games }}</td>
+                            </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="progress">
+            <div class="bar">
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:{{ prediction.0 }}%">
+                    <div class="red-bar massive-font">
+                        {{ prediction.0 }}% winning chance
+                    </div>
+                </div>
+                <div class="progress-bar" role="progressbar" style="width:{{ prediction.1 }}%">
+                    <div class="blue-bar massive-font">
+                        {{ prediction.1 }}% winning chance
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<style>
+    .title {
+        margin-left: 25px;
+        color: grey;
+        font-family: "Lobster";
+            font-size: 1.8em !important
+    }
+
+    body {
+        background-image: url("http://na.leagueoflegends.com/sites/default/files/upload/art/akali_vs_baron_3.jpg");
+        background-color: blue;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size:cover;
+        background-position:center;
+    }
+
+    .progress-line, .progress-line:before {
+        height: 5px;
+        width: 100%;
+        margin: 0;
+
+    }
+
+    .navbar-header {
+        float:left !important;
+    }
+    .progress-line {
+        background-color: #90FF0D;
+        display: -webkit-flex;
+        display: flex;
+    }
+    .progress-line:before {
+        background-color: #E89C0C;
+        content: '';
+        -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    }
+    @-webkit-keyframes running-progress {
+        0% { margin-left: 0px; margin-right: 100%; }
+        50% { margin-left: 25%; margin-right: 0%; }
+        100% { margin-left: 100%; margin-right: 0; }
+    }
+    @keyframes running-progress {
+        0% { margin-left: 0px; margin-right: 100%; }
+        50% { margin-left: 25%; margin-right: 0%; }
+        100% { margin-left: 100%; margin-right: 0; }
+    }
+
+    .load {
+        display: none;
+    }
+
+    .error {
+        margin: 50px auto;
+    }
+
+
+
+
+
+</style>
+
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <div class="title">
+                <a class="navbar-brand" href="/">League of Legends - Predict</a>
+            </div>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Statistics</a></li>
+        </ul>
+
+        <form class="navbar-form pull-right" method="get" action="/search">
+            <div class="form-group">
+
+                <select class="form-control" name="region">
+                    {% for r in regions %}
+                    <option value="{{ r }}">{{ r|upper }}</option>
+                    {% endfor %}
+                </select>
+                <input type="text" name="summoner" class="form-control" id="summoner-name"
+                       placeholder="Enter summoner name"
+                       value="" required autofocus>
+                <button class="btn btn-info" type="submit">Search</button>
+            </div>
+
+        </form>
+
+    </div><!--/.navbar-collapse -->
+
+    <div class="load">
+        <div class="progress-line"></div>
+    </div>
+
+
+</nav>
+
+
+<div class="container block">
+    {% block error %}
+    {% endblock %}
+</div>
+
+<div class="container block">
+    {% block results %}
+    {% endblock %}
+</div>
+
+
+</body>
+
+<script>
+<!--showing loading animation-->
+    $(".btn-info").click(function() {
+        if($('#summoner-name').val().length != 0) {
+            $('.load').fadeIn();
+            $('.block').fadeOut();
+        }
+    });
+
+</script>
+
+</html>
