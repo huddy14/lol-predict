@@ -1,15 +1,19 @@
+import os
+
 from django.shortcuts import render
 
-from .service import regions
-from .service import RiotService, ServiceException
-from .naive_bayes import train_naive_bayes
-import os
+from utils.naive_bayes import bayes,Data
+from utils.service import RiotService, ServiceException
+from utils.service import regions
 
 # Create your views here.
 
-def index(request):
+def home(request):
 
     return render(request, 'predict/home.html', {'regions':regions})
+
+def about(request):
+    return render(request, 'predict/about.html', {'regions':regions})
 
 
 def search(request):
@@ -27,7 +31,7 @@ def search(request):
         red = []
         blue = []
 
-        clf = train_naive_bayes(os.getcwd()+'/database/matchData')
+        clf = bayes[Data.DEFAULT]
 
         probability = clf.predict_proba(predict)[0]
         probability[0] = round(probability[0] * 100, 2)
@@ -40,4 +44,4 @@ def search(request):
                 blue.append(player)
         return render(request, 'predict/search.html', {'name':request.GET['summoner'], 'region':request.GET['region'], 'regions':regions, 'red':red, 'blue':blue, 'prediction':probability})
 
-    return render(request, 'predict/search.html', {'name': 'nie dziala post'})
+    return render(request, 'predict/error.html', {'message': 'Something went wrong. Please try again in a minute', 'regions': regions})

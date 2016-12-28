@@ -7,6 +7,7 @@
         background: rgba(0, 0, 0, 0.5) !important;
     }
 
+
 </style>
 
 
@@ -14,9 +15,10 @@
 {% block error %}
 <div class="jumbotron">
     <div class="alert alert-warning fade in" role="alert">
-        <h3><strong>Error!</strong> {{ message }}</h3>
-        <br>
-        Make sure you entered a valid username that is currently in a game
+        <h2><strong>Error!</strong> {{ message }}</h2>
+        <p>
+            Make sure you entered a valid username that is currently in a game
+        </p>
     </div>
 </div>
 {% endblock %}
