@@ -31,7 +31,7 @@ def search(request):
         red = []
         blue = []
 
-        clf = bayes[Data.DEFAULT]
+        clf = bayes[Data.DEFAULT].clf
 
         probability = clf.predict_proba(predict)[0]
         probability[0] = round(probability[0] * 100, 2)

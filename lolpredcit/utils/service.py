@@ -97,10 +97,9 @@ class RiotService:
 
     def __init__(self, region):
         self.region = region
-        #todo unconment
-        #
-        # with open(os.getcwd()+'/database/champDict.json') as dict_json:
-        #     self.champ_dict = json.load(dict_json)
+
+        with open(os.getcwd()+'/database/champDict.json') as dict_json:
+            self.champ_dict = json.load(dict_json)
 
     def get_current_game(self, summoner_id):
         """ gets current match for specified id and returns id as json object
