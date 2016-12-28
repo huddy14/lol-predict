@@ -1,7 +1,32 @@
+<style>
+    .jumbotron {
+        background: rgb(200, 54, 54);
+        background: rgba(0, 0, 0, 0.9) !important;
+    }
 
+    .txt {
+        color: white;
+    }
+
+
+
+</style>
 
 {% extends 'base.html' %}
-{% block result %}
-
-
+{% block results %}
+<div class="jumbotron">
+    <div class="txt">
+        <h2>@author <br> Piotr Jendrzyca</h2><br><br>
+        <h3>@description</h3>
+        <p>The projects aim is to predict an outcome of ongoing League of Legends match using supervised learning
+            methods. For that purpose Naive Bayes Classifcation algorithm and previously collected data from
+            league API were used.</p>
+        <p>At this point a total of {{ total }} games was collected. They were split as follows: {{ training }} games
+            into training set and {{ test }} into test set. The best predictions accuracy
+            the system was able to achieve is {{ accuracy|stringformat:".2f" }}%. Such low prediction rate might be caused by
+            the
+            small amount of collected matches as well as the begining of the season when the players didn't play a lot of
+            matches and its hard to predict how well each summoner perform on specific champion. </p>
+    </div>
+</div>
 {% endblock %}

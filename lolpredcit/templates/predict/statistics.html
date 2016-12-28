@@ -1,0 +1,19 @@
+<style>
+    .cont {
+        margin: 10% auto !important;
+    }
+</style>
+
+{% extends 'base.html' %}
+{% block stats %}
+<div class="cont">
+
+    {% for graph in graphs %}
+    {% if graph %}
+    <div style="width:70%;height:80%; margin: 20px auto;">
+        {{ graph|safe }}
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+{% endblock %}

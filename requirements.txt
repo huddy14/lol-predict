@@ -1,0 +1,12 @@
+cycler==0.10.0
+Django==1.10.4
+matplotlib==1.5.3
+numpy==1.11.3
+plotly==1.12.12
+pyparsing==2.1.10
+python-dateutil==2.6.0
+pytz==2016.10
+requests==2.12.4
+scikit-learn==0.18.1
+scipy==0.18.1
+six==1.10.0

@@ -1,9 +1,8 @@
 import csv
-from sklearn.naive_bayes import GaussianNB
-from enum import Enum
-import matplotlib.pyplot as plt
 import os
-import numpy as np
+from enum import Enum
+
+from sklearn.naive_bayes import GaussianNB
 
 
 class Data(Enum):
@@ -22,6 +21,7 @@ def train_naive_bayes(**kwargs):
 
     return clf
 
+
 class NBClassifier:
     def __init__(self, data_type):
         self.clf = GaussianNB()
@@ -35,7 +35,7 @@ class NBClassifier:
         self.score = self.clf.score(data['test_x'], data['test_y'])
 
 
-def _handle_data(data, path='matchData', split_ratio=.7):#os.getcwd()+'/database/
+def _handle_data(data, path=os.getcwd() + '/database/matchData', split_ratio=.7):  # os.getcwd()+'/database/
     X = []
     Y = []
     for line in _read_lines(path):
@@ -76,20 +76,13 @@ def _split_to_test_and_training_sets(X, Y, ratio):
         return {
             'train_x': X[:split], 'train_y': Y[:split],  # training data sets
             'test_x': X[split:], 'test_y': Y[split:],  # test data sets
-            'total_size' : size, 'split_size' : split # sizes
+            'total_size': size, 'split_size': split  # sizes
         }
+
 
 def generate_plot():
     pass
 
 
-bayes = { data : NBClassifier(data) for data in Data }
+bayes = {data: NBClassifier(data) for data in Data}
 print(bayes[Data.DEFAULT].score)
-labels = 'Failed prediction', 'Success prediction'
-colors = ['red','blue']
-plt.pie([1-bayes[Data.DEFAULT].score,bayes[Data.DEFAULT].score], labels=labels, colors=colors)
-plt.show()
-
-
-
-
