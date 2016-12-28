@@ -11,17 +11,6 @@ class Data(Enum):
     MULTIPLIED = 2
 
 
-def train_naive_bayes(**kwargs):
-    clf = GaussianNB()
-    clf.fit(kwargs['train_x'], kwargs['train_y'])
-
-    print(len(kwargs['train_x']), len(kwargs['test_x']))
-    score = clf.score(kwargs['test_x'], kwargs['test_y'])
-    print(score)
-
-    return clf
-
-
 class NBClassifier:
     def __init__(self, data_type):
         self.clf = GaussianNB()
@@ -35,7 +24,7 @@ class NBClassifier:
         self.score = self.clf.score(data['test_x'], data['test_y'])
 
 
-def _handle_data(data, path=os.getcwd() + '/database/matchData', split_ratio=.7):  # os.getcwd()+'/database/
+def _handle_data(data, path=os.getcwd() + '/database/matchData', split_ratio=.7):
     X = []
     Y = []
     for line in _read_lines(path):
